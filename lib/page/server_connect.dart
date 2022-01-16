@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:healthcare_prediction/page/connect_to_server.dart';
+import 'package:healthcare_prediction/page/pushdata.dart';
 
 class ServerConnector extends StatefulWidget {
   const ServerConnector({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class ServerConnector extends StatefulWidget {
 class _ServerConnectorState extends State<ServerConnector> {
   TextEditingController portController = TextEditingController();
   TextEditingController hostController = TextEditingController();
-  bool isConnecting = false;
+  // bool isConnecting = false;
   String error = '';
 
   @override
@@ -25,44 +25,39 @@ class _ServerConnectorState extends State<ServerConnector> {
       ),
       body: error.isNotEmpty
           ? Text(error)
-          : isConnecting
-              ? Text('Etablish Connection')
-              : Column(
-                  children: [
-                    TextFormField(
-                      controller: hostController,
-                    ),
-                    TextFormField(
-                      controller: portController,
-                    ),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (hostController.text.isNotEmpty &&
-                              portController.text.isNotEmpty) {
-                            setState(() {
-                              isConnecting = true;
-                            });
-
-                            Socket.connect(hostController.text,
-                                    int.parse(portController.text))
-                                .then((value) => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              HealthPrediction(
-                                                socket: value,
-                                              )),
-                                    ))
-                                .onError((error, stackTrace) {
-                              setState(() {
-                                error = error.toString();
-                              });
-                            });
-                          }
-                        },
-                        child: Text('Connect')),
-                  ],
+          // : isConnecting
+          // ? Text('Etablish Connection')
+          : Column(
+              children: [
+                TextFormField(
+                  controller: hostController,
                 ),
+                TextFormField(
+                  controller: portController,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      if (hostController.text.isNotEmpty &&
+                          portController.text.isNotEmpty) {
+                        Socket.connect(hostController.text,
+                                int.parse(portController.text))
+                            .then((value) => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HealthPrediction(
+                                            socket: value,
+                                          )),
+                                ))
+                            .onError((error, stackTrace) {
+                          setState(() {
+                            error = error.toString();
+                          });
+                        });
+                      }
+                    },
+                    child: Text('Connect')),
+              ],
+            ),
     );
   }
 }
