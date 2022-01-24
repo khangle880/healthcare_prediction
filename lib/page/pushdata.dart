@@ -26,6 +26,13 @@ class _HealthPredictionState extends State<HealthPrediction> {
             content: Text('Send success'),
           ));
         }
+        if (serverResponse.contains('prediction:')) {
+          String id = serverResponse.replaceAll('prediction:', '').split(';')[0].split(',')[0];
+          String predict = serverResponse.replaceAll('prediction:', '').split(';')[0].split(',')[1];          
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('id: $id, stroke prediction: $predict'),
+          ));
+        }
       },
     );
     super.initState();

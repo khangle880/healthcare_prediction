@@ -29,6 +29,9 @@ void main() async {
       if (message.contains('send:')) {
         notifyAllClient(message.replaceAll('send:', ''));
       }
+      if (message.contains('result:')) {
+        notifyAllClient(message.replaceAll('result:', 'prediction:'));
+      }
     });
   });
 }
