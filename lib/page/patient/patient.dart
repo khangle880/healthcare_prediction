@@ -1,5 +1,6 @@
 import 'dart:io';
 // import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
@@ -17,37 +18,25 @@ class PatientsPage extends StatefulWidget {
 
 class _PatientsPageState extends State<PatientsPage> {
   BehaviorSubject<List<PatientModel>> patients = BehaviorSubject.seeded([]);
-  late CountdownTimerController controller;
   @override
   void initState() {
     super.initState();
-    // fetchAll();
-    int endTime = DateTime.now().millisecondsSinceEpoch;
-    controller = CountdownTimerController(endTime: endTime, onEnd: onEnd);
+    fetchAll();
   }
 
-  void onEnd() {
-    Future.delayed(Duration(seconds: 3), () {
-      // TODO: handle after timer out
-      int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 70;
-      controller = CountdownTimerController(endTime: endTime, onEnd: onEnd);
-      // setState(() {});
+  Future<List> fetchAll() async {
+    List list = [];
+    FirebaseFirestore.instance
+        .collection('patients')
+        .snapshots()
+        .map((event) =>
+            event.docs.map((e) => PatientModel.fromJson(e.data())).toList())
+        .listen((event) {
+      patients.add(event);
+      setState(() {});
     });
+    return list;
   }
-
-  // Future<List> fetchAll() async {
-  //   List contactList = [];
-  //   FirebaseFirestore.instance
-  //       .collection('patients')
-  //       .snapshots()
-  //       .map((event) =>
-  //           event.docs.map((e) => PatientModel.fromJson(e.data())).toList())
-  //       .listen((event) {
-  //     patients = event;
-  //     setState(() {});
-  //   });
-  //   return contactList;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -169,13 +158,36 @@ class _PatientsPageState extends State<PatientsPage> {
   }
 }
 
-class ExpansionChild extends StatelessWidget {
+class ExpansionChild extends StatefulWidget {
   const ExpansionChild({
     Key? key,
     required this.item,
   }) : super(key: key);
 
   final PatientModel item;
+
+  @override
+  State<ExpansionChild> createState() => _ExpansionChildState();
+}
+
+class _ExpansionChildState extends State<ExpansionChild> {
+  late CountdownTimerController controller;
+
+  @override
+  void initState() {
+    int endTime = DateTime.now().millisecondsSinceEpoch;
+    controller = CountdownTimerController(endTime: endTime, onEnd: onEnd);
+    super.initState();
+  }
+
+  void onEnd() {
+    Future.delayed(Duration(seconds: 3), () {
+      // TODO: handle after timer out
+      int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 70;
+      controller = CountdownTimerController(endTime: endTime, onEnd: onEnd);
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -188,10 +200,11 @@ class ExpansionChild extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomTextSpan(title: 'Bmi: ', value: item.bmi.toString()),
+                CustomTextSpan(
+                    title: 'Bmi: ', value: widget.item.bmi.toString()),
                 CustomTextSpan(
                   title: 'Avg Glucose: ',
-                  value: item.avgGlucoseLevel.toString(),
+                  value: widget.item.avgGlucoseLevel.toString(),
                 ),
               ],
             ),
@@ -205,13 +218,13 @@ class ExpansionChild extends StatelessWidget {
               children: [
                 CustomTextSpan(
                     title: 'Heart Disease: ',
-                    value: item.heartDisease ? 'Yes' : 'No'),
+                    value: widget.item.heartDisease ? 'Yes' : 'No'),
                 CustomTextSpan(
                     title: 'Hypertension: ',
-                    value: item.hypertension ? 'Yes' : 'No'),
+                    value: widget.item.hypertension ? 'Yes' : 'No'),
                 CustomTextSpan(
                     title: 'Smoking: ',
-                    value: item.smokingStatus.value().toString()),
+                    value: widget.item.smokingStatus.value().toString()),
               ],
             ),
           ),
@@ -219,12 +232,25 @@ class ExpansionChild extends StatelessWidget {
               child: Column(
                 children: [
                   Text('Prediction'),
-                  if (item.strokePredict == null) Text('Awaiting'),
-                  if (item.strokePredict != null)
-                    Text((item.strokePredict!)
+                  if (widget.item.strokePredict == null) Text('Awaiting'),
+                  if (widget.item.strokePredict != null)
+                    Text((widget.item.strokePredict!)
                         ? 'Stroke occured'
                         : 'Stroke unoccured'),
-                  // Text('Prediction'),
+                  CountdownTimer(
+                    controller: controller,
+                    widgetBuilder: (_, time) {
+                      if (time == null) {
+                        return Text('Time out');
+                      }
+                      return CircularProgressIndicator(
+                          value: ((time.days ?? 0) * 24 +
+                                  (time.hours ?? 0) * 60 +
+                                  (time.min ?? 0) * 60 +
+                                  (time.sec ?? 0))
+                              .toDouble());
+                    },
+                  ),
                 ],
               ),
               flex: 2)

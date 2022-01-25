@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:healthcare_prediction/page/patient/patient_model.dart';
@@ -87,7 +88,7 @@ class AddPatientProvider with ChangeNotifier {
     if (residenceType == null) {
       return Future.value('Please choose your residence type');
     }
-    patientModel = PatientModel(
+    final patient = PatientModel(
         gender: gender!,
         age: double.parse(ageController.text),
         hypertension: hypertension,
@@ -98,7 +99,9 @@ class AddPatientProvider with ChangeNotifier {
         avgGlucoseLevel: double.parse(avgGlucoseController.text),
         bmi: double.parse(bmiController.text),
         smokingStatus: smokingStatus!);
-    // FirebaseFirestore.instance.collection('patients').add(patient.toJson());
+
+    // TODO: add handle add patient
+    FirebaseFirestore.instance.collection('patients').add(patient.toJson());
     return Future.value(null);
   }
 }

@@ -1,0 +1,135 @@
+{
+  "project_info": {
+    "project_number": "998663950828",
+    "firebase_url": "https://daily-moments-251d1-default-rtdb.firebaseio.com",
+    "project_id": "daily-moments-251d1",
+    "storage_bucket": "daily-moments-251d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998663950828:android:91300c7cdcf4d548e9b0c9",
+        "android_client_info": {
+          "package_name": "com.example.healthcare_prediction"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998663950828-0h4sgskoaliosteuh9aup7bg2p0g916n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH298qnkJ06sf6h85PZDo2vtr4TAerAvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998663950828-0h4sgskoaliosteuh9aup7bg2p0g916n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998663950828:android:3c6068d604abee27e9b0c9",
+        "android_client_info": {
+          "package_name": "com.example.insta_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998663950828-0h4sgskoaliosteuh9aup7bg2p0g916n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH298qnkJ06sf6h85PZDo2vtr4TAerAvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998663950828-0h4sgskoaliosteuh9aup7bg2p0g916n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998663950828:android:99359135821f5fcde9b0c9",
+        "android_client_info": {
+          "package_name": "com.example.login_sns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998663950828-q34ton6keu47l88km2br71fbph9ijki8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.login_sns",
+            "certificate_hash": "8b4e44c774cbf5b7f981bb48f6c400ae8cbd0c19"
+          }
+        },
+        {
+          "client_id": "998663950828-0h4sgskoaliosteuh9aup7bg2p0g916n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH298qnkJ06sf6h85PZDo2vtr4TAerAvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998663950828-0h4sgskoaliosteuh9aup7bg2p0g916n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998663950828:android:55d8fb9893ab4cdee9b0c9",
+        "android_client_info": {
+          "package_name": "com.example.stroke_predict"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998663950828-0h4sgskoaliosteuh9aup7bg2p0g916n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH298qnkJ06sf6h85PZDo2vtr4TAerAvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998663950828-0h4sgskoaliosteuh9aup7bg2p0g916n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

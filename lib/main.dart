@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:healthcare_prediction/page/server_connect.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
